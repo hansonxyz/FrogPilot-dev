@@ -7,6 +7,7 @@ import urllib.error
 import urllib.request
 
 import cereal.messaging as messaging
+import openpilot.selfdrive.sentry as sentry
 
 from cereal import car, log
 from openpilot.common.params import Params
@@ -32,6 +33,22 @@ def automatic_update_check(params):
     os.system("pkill -SIGHUP -f selfdrive.updated.updated")
   elif update_state == "idle":
     os.system("pkill -SIGUSR1 -f selfdrive.updated.updated")
+
+def check_error_log():
+  error_file = os.path.join(sentry.CRASHES_DIR, 'error.txt')
+
+  if not os.path.isfile(error_file):
+    return
+
+  phrases_to_check = [
+    "To overwrite it, set 'overwrite' to True.",
+  ]
+
+  with open(error_file, 'r') as file:
+    content = file.read()
+
+  if any(phrase in content for phrase in phrases_to_check):
+    os.remove(error_file)
 
 def github_pinged(url="https://github.com", timeout=5):
   try:
@@ -78,6 +95,8 @@ def frogpilot_thread():
     started = deviceState.started
 
     if started:
+      check_error_log()
+
       if CP is None:
         with car.CarParams.from_bytes(params.get("CarParams", block=True)) as msg:
           CP = msg
