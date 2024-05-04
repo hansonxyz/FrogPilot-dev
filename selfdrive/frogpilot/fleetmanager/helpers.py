@@ -486,5 +486,5 @@ def store_toggle_values(updated_values):
       print(f"Failed to update {key}: {e}")
 
   params_memory.put_bool("FrogPilotTogglesUpdated", True)
-  time.sleep(0.1)
+  time.sleep(1)
   params_memory.put_bool("FrogPilotTogglesUpdated", False)
