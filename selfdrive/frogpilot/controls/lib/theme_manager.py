@@ -85,5 +85,5 @@ class ThemeManager:
   def update_holiday_theme(self, theme_id):
     self.params_memory.put_int("CurrentHolidayTheme", theme_id)
     self.params_memory.put_bool("FrogPilotTogglesUpdated", True)
-    time.sleep(1)
+    time.sleep(0.1)
     self.params_memory.put_bool("FrogPilotTogglesUpdated", False)
