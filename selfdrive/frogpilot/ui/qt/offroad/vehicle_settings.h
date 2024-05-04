@@ -4,6 +4,7 @@
 
 #include <QStringList>
 
+#include "selfdrive/frogpilot/ui/qt/widgets/frogpilot_controls.h"
 #include "selfdrive/ui/qt/offroad/settings.h"
 #include "selfdrive/ui/ui.h"
 
@@ -18,6 +19,7 @@ private:
   void setModels();
   void updateCarToggles();
   void updateState(const UIState &s);
+  void updateToggles();
 
   ButtonControl *selectMakeButton;
   ButtonControl *selectModelButton;
@@ -34,6 +36,7 @@ private:
   std::map<std::string, ParamControl*> toggles;
 
   Params params;
+  Params paramsMemory{"/dev/shm/params"};
 
   bool hasExperimentalOpenpilotLongitudinal;
   bool hasOpenpilotLongitudinal;

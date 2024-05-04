@@ -2,6 +2,7 @@
 
 #include <set>
 
+#include "selfdrive/frogpilot/ui/qt/widgets/frogpilot_controls.h"
 #include "selfdrive/ui/qt/offroad/settings.h"
 #include "selfdrive/ui/ui.h"
 
@@ -22,6 +23,7 @@ private:
   void updateCarToggles();
   void updateMetric();
   void updateState(const UIState &s);
+  void updateToggles();
 
   ButtonControl *deleteModelBtn;
   ButtonControl *downloadModelBtn;

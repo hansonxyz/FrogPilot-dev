@@ -507,9 +507,10 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
           if (result == 0) {
             std::cout << "Restore successful from " << sourcePath << " to " << targetPath << std::endl;
             toggleBackup->setValue(tr("Success!"));
-            updateFrogPilotToggles();
+            paramsMemory.putBool("FrogPilotTogglesUpdated", true);
             std::this_thread::sleep_for(std::chrono::seconds(3));
             toggleBackup->setValue("");
+            paramsMemory.putBool("FrogPilotTogglesUpdated", false);
           } else {
             std::cerr << "Restore failed with error code: " << result << std::endl;
             toggleBackup->setValue(tr("Failed..."));

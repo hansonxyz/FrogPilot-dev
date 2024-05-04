@@ -6,8 +6,6 @@
 
 #include "selfdrive/ui/qt/widgets/controls.h"
 
-void updateFrogPilotToggles();
-
 class FrogPilotConfirmationDialog : public ConfirmationDialog {
   Q_OBJECT
 
